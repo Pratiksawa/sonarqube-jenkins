@@ -1,0 +1,28 @@
+version: "3.3"
+services:
+    sonarqube:
+      image: sonarqube
+      ports:
+        - "9000:9000"
+      networks:
+        - my-network
+
+
+    jenkins:
+      image: jenkins/jenkins:lts-jdk11
+      ports:
+        - "8080:8080"
+        - "50000:50000"
+      volumes:
+        - jenkins_home:/var/jenkins_home
+      networks:
+        - my-network
+
+networks:
+   - my-network
+networks:
+    my-network:
+      external: true
+
+volumes:
+   jenkins_home:
